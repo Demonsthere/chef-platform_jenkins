@@ -48,6 +48,12 @@ template '/etc/default/jenkins' do
   notifies :restart, 'service[jenkins]', :delayed
 end
 
+group 'docker' do
+  action :manage
+  members ['vagrant','jenkins']
+end
+
+
 service 'jenkins' do
   supports status: true, restart: true, reload: true
   action [:enable, :start]

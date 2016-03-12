@@ -1,11 +1,19 @@
 configcheckout = '/var/lib/jenkins/scm-sync-configuration/checkoutConfiguration'
-configshared = '/home/vagrant/jenkins-config'
+configshared = '/var/lib/jenkins/jenkins-platform_synch'
+
+git configshared do
+  repository node['platform_jenkins']['master']['jenkins_config_git_url']
+  reference 'master'
+  user 'jenkins'
+  group 'jenkins'
+  action :sync
+end
 
 bash 'checkout scm-sync-configuration' do
   code <<-EOL
   echo "Proceeding  with checkout #{node['platform_jenkins']['master']['jenkins_config_git_url']}" > log.log
 
-  /etc/init.d/jenkins stop
+  service jenkins stop
   rm -f /var/lib/jenkins/*.xml
   if [ -d "#{configshared}" ]; then
     mkdir -p $(dirname #{configcheckout})

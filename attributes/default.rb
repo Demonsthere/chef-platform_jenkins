@@ -5,7 +5,7 @@ default['platform_jenkins']['master']['log_directory'] = '/var/log/jenkins'
 default['platform_jenkins']['master']['listen_address'] = '0.0.0.0'
 default['platform_jenkins']['master']['jenkins_args'] = ''
 
-default['platform_jenkins']['master']['version'] = '1.650'
+default['platform_jenkins']['master']['version'] = '1.570'
 
 default['platform_jenkins']['master']['source'] = "http://192.168.42.100:80/data/jenkins/bin/jenkins_#{node['platform_jenkins']['master']['version']}_all.deb"
 
