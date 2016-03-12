@@ -53,7 +53,6 @@ group 'docker' do
   members ['vagrant','jenkins']
 end
 
-
 service 'jenkins' do
   supports status: true, restart: true, reload: true
   action [:enable, :start]
