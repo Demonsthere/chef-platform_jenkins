@@ -12,7 +12,7 @@ end
 bash 'move_jenkins_installation' do
   user 'root'
   code <<-EOL
-    REAL_VAR_PATH_BASE=$(echo "#{node['rpi_jenkins']['real_var_path']}" | sed -e 's;\/$;;' | sed -e 's;\/jenkins$;;')
+    REAL_VAR_PATH_BASE=$(echo "#{node['platform_jenkins']['real_var_path']}" | sed -e 's;\/$;;' | sed -e 's;\/jenkins$;;')
     [ -z "${REAL_VAR_PATH_BASE}" ] && REAL_VAR_PATH_BASE=/srv
     [ -d $REAL_VAR_PATH_BASE/jenkins ] && rm -Rf $REAL_VAR_PATH_BASE/jenkins
     [ ! -d $REAL_VAR_PATH_BASE ] && mkdir -p $REAL_VAR_PATH_BASE

@@ -6,9 +6,7 @@ default['platform_jenkins']['master']['listen_address'] = '0.0.0.0'
 default['platform_jenkins']['master']['jenkins_args'] = ''
 
 default['platform_jenkins']['master']['version'] = '1.650'
-default['platform_jenkins']['master']['install_method'] = 'download_deb'
-default['platform_jenkins']['master']['mirror'] = 'http://192.168.42.100:80/data'
-default['platform_jenkins']['master']['updatecenter'] = 'http://192.168.42.100:80/data/jenkins/updates/'
+
 default['platform_jenkins']['master']['source'] = "http://192.168.42.100:80/data/jenkins/bin/jenkins_#{node['platform_jenkins']['master']['version']}_all.deb"
 
 default['platform_jenkins']['master']['plugin_baseurl'] = %w(https://updates.jenkins-ci.org/download/plugins http://192.168.42.100:80/data/jenkins/plugins)
@@ -62,7 +60,8 @@ default['platform_jenkins']['master']['plugin_list'] = [
   ['token-macro', '1.10'],
   ['translation', '1.10'],
   ['windows-slaves', '1.0'],
-  ['xvfb', '1.0.13']
+  ['xvfb', '1.0.13'],
+  ['purge-build-queue-plugin', '1.0']
 ]
 
 # let jenkins run on a different port (9080 instead of the standard 8080)
@@ -72,7 +71,7 @@ default['platform_jenkins']['master']['port'] = 9080
 default['platform_jenkins']['real_var_path'] = '/srv/jenkins'
 
 # jenkins config git url
-default['platform_jenkins']['master']['jenkins_config_git_url'] = 'ssh://git@stash.hybris.com:7999/c3po/c3po-jenkins-config.git'
+default['platform_jenkins']['master']['jenkins_config_git_url'] = 'git@github.com:Demonsthere/jenkins-platform_synch.git'
 
 # configure jenkins full url that is seen in build_url
 default['platform_jenkins']['master']['jenkins_full_url'] = "http://192.168.42.200:9080"
