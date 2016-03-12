@@ -1,0 +1,7 @@
+name 'chef-platform_jenkins'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures chef-platform_jenkins'
+long_description 'Installs/Configures chef-platform_jenkins'
+version '0.1.0'
