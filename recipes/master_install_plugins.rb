@@ -47,5 +47,6 @@ plugins_to_be_installed.each_with_index do |plugin, i|
     retries 2
     retry_delay 2
     notifies :restart, 'service[jenkins]', :delayed if i == plugins_to_be_installed.size - 1
+    action :create_if_missing
   end
 end
