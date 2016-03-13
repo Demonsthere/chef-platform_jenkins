@@ -41,7 +41,7 @@ default['platform_jenkins']['master']['plugin_list'] = [
   ['junit', '1.4'],
   ['locale', '1.2'],
   ['nodelabelparameter', '1.5.1'],
-  ['monitoring', '1.59.0']
+  ['monitoring', '1.59.0'],
   ['pam-auth', '1.2'],
   ['Parameterized-Remote-Trigger', '2.1.3'],
   ['parameterized-trigger', '2.25'],
@@ -75,12 +75,12 @@ default['platform_jenkins']['real_var_path'] = '/srv/jenkins'
 default['platform_jenkins']['master']['jenkins_config_git_url'] = 'git@github.com:Demonsthere/jenkins-platform_synch.git'
 
 # configure jenkins full url that is seen in build_url
-default['platform_jenkins']['master']['jenkins_full_url'] = "http://192.168.42.200:9080"
+default['platform_jenkins']['master']['jenkins_full_url'] = "http://192.168.42.200:#{node['platform_jenkins']['master']['port']}"
 default['platform_jenkins']['master']['jenkins_admin_email'] = 'jakub.blaszczyk@sap.com'
 
 # a bit more heap for the master
 default['platform_jenkins']['master']['jvm_options'] = '-XX:MaxPermSize=1024m -Dorg.eclipse.jetty.server.Request.maxFormContentSize=500000'
-default['platform_jenkins']['slave']['jvm_options'] = '-XX:MaxPermSize=512m'
+default['platform_jenkins']['slave']['jvm_options'] = '-XX:MaxPermSize=1024m'
 
 # slave config
 default['platform_jenkins']['slave']['home'] = '/var/lib/jenkins'
@@ -89,9 +89,9 @@ default['platform_jenkins']['slave']['swarm_version'] = '1.22'
 default['platform_jenkins']['slave']['swarm_jar'] = "swarm-client-#{node['platform_jenkins']['slave']['swarm_version']}-jar-with-dependencies.jar"
 default['platform_jenkins']['slave']['swarm_base_url'] = 'http://192.168.42.100:80/data/jenkins/bin/'
 default['platform_jenkins']['slave']['swarm_version']        = '1.22'
-default['platform_jenkins']['slave']['master_url']           = 'http://192.168.42.200:4290'
+default['platform_jenkins']['slave']['master_url']           = "http://192.168.42.200:#{node['platform_jenkins']['master']['port']}"
 default['platform_jenkins']['slave']['jenkins_ui_user']      = 'jenkins-ui-user'
 default['platform_jenkins']['slave']['jenkins_ui_password']  = 'jenkins-ui-password'
-default['platform_jenkins']['slave']['labels']               = 'swarm'
+default['platform_jenkins']['slave']['labels']               = 'swarm docker'
 default['platform_jenkins']['slave']['name']                 = 'jkslave'
-default['platform_jenkins']['slave']['executors']            = '1'
+default['platform_jenkins']['slave']['executors']            = '2'

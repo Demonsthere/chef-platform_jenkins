@@ -1,5 +1,6 @@
 include_recipe 'platform_base'
 include_recipe 'platform_jenkins::master_install_deb'
+include_recipe 'platform_jenkins::master_move'
 include_recipe 'platform_jenkins::master_install_plugins'
 include_recipe 'platform_jenkins::ssh_setup'
 include_recipe 'platform_jenkins::git_checkout'

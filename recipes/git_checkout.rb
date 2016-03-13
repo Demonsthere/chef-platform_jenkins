@@ -1,18 +1,8 @@
 configcheckout = '/var/lib/jenkins/scm-sync-configuration/checkoutConfiguration'
 configshared = '/var/lib/jenkins/jenkins-platform_synch'
 
-git configshared do
-  repository node['platform_jenkins']['master']['jenkins_config_git_url']
-  reference 'master'
-  user 'jenkins'
-  group 'jenkins'
-  action :sync
-end
-
 bash 'checkout scm-sync-configuration' do
   code <<-EOL
-  echo "Proceeding  with checkout #{node['platform_jenkins']['master']['jenkins_config_git_url']}" > log.log
-
   service jenkins stop
   rm -f /var/lib/jenkins/*.xml
   if [ -d "#{configshared}" ]; then
@@ -35,11 +25,12 @@ bash 'checkout scm-sync-configuration' do
   done
   cp -r #{configcheckout}/*.xml /var/lib/jenkins/
   chown jenkins:jenkins /var/lib/jenkins/*.xml
-  /etc/init.d/jenkins start
+  service jenkins start
   EOL
   only_if "su - jenkins -c \"git ls-remote #{node['platform_jenkins']['master']['jenkins_config_git_url']} >/dev/null 2>&1\" || test -d #{configshared}"
 end
 
-log 'ssh keys not valid. SCM Sync Configuration was not perfomed.' do
+log 'SCM-Synch log' do
+  message 'ssh keys not valid. SCM Sync Configuration was not perfomed'
   not_if "su - jenkins -c \"git ls-remote #{node['platform_jenkins']['master']['jenkins_config_git_url']}\""
 end

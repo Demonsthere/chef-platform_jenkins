@@ -6,24 +6,27 @@ end
 execute 'stop-jenkins' do
   command 'echo w00t'
   notifies :stop, 'service[jenkins]', :immediately
-  not_if 'test -L /var/lib/jenkins'
+  not_if "test -L #{node['platform_jenkins']['master']['home']}"
 end
 
-bash 'move_jenkins_installation' do
-  user 'root'
-  code <<-EOL
-    REAL_VAR_PATH_BASE=$(echo "#{node['platform_jenkins']['real_var_path']}" | sed -e 's;\/$;;' | sed -e 's;\/jenkins$;;')
-    [ -z "${REAL_VAR_PATH_BASE}" ] && REAL_VAR_PATH_BASE=/srv
-    [ -d $REAL_VAR_PATH_BASE/jenkins ] && rm -Rf $REAL_VAR_PATH_BASE/jenkins
-    [ ! -d $REAL_VAR_PATH_BASE ] && mkdir -p $REAL_VAR_PATH_BASE
-    [ ! -d $REAL_VAR_PATH_BASE/jenkins ] && mv /var/lib/jenkins $REAL_VAR_PATH_BASE
-    ln -s $REAL_VAR_PATH_BASE/jenkins /var/lib/jenkins
-  EOL
-  not_if 'test -L /var/lib/jenkins'
+execute 'move jenkins directory' do
+  command "mv #{node['platform_jenkins']['master']['home']} #{node['platform_jenkins']['real_var_path']}"
+  not_if { ::File.directory? node['platform_jenkins']['real_var_path'] }
+end
+
+execute 'remove base folder, if it persisted' do
+  command "rm -rf #{node['platform_jenkins']['master']['home']}"
+  action :run
+  only_if { ::File.directory? node['platform_jenkins']['master']['home'] }
+end
+
+link 'var/lib/jenkins' do
+  to node['platform_jenkins']['real_var_path']
+  link_type :symbolic
 end
 
 execute 'start-jenkins' do
   command 'echo w00t'
   notifies :start, 'service[jenkins]', :delayed
-  not_if 'test -L /var/lib/jenkins'
+  not_if "test -L #{node['platform_jenkins']['master']['home']}"
 end

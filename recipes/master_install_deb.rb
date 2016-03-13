@@ -1,14 +1,16 @@
-package 'daemon'
-
+# install the prerequisites for the jenkins-package
+%w(daemon psmisc).each do |pkg|
+  package pkg do
+    action :upgrade
+  end
+end
+  
 # Download the remote DEB file
 remote_file "#{Chef::Config[:file_cache_path]}/jenkins_#{node['platform_jenkins']['master']['version']}_all.deb" do
   source   node['platform_jenkins']['master']['source']
   checksum node['platform_jenkins']['master']['checksum'] if node['platform_jenkins']['master']['checksum']
   action :create_if_missing
 end
-
-# install the prerequisites for the jenkins-package
-package 'psmisc'
 
 dpkg_package "jenkins_#{node['platform_jenkins']['master']['version']}_all.deb" do
   options '--force-confdef'

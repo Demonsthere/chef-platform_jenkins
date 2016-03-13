@@ -21,7 +21,7 @@ cookbook_file 'id_rsa.pub' do
 end
 
 cookbook_file 'known_hosts' do
-  path '/var/lib/jenkins/known_hosts'
+  path '/var/lib/jenkins/.ssh/known_hosts'
   owner 'jenkins'
   group 'jenkins'
   mode '0644'
