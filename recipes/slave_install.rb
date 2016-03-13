@@ -41,3 +41,8 @@ end
 link node['platform_jenkins']['slave']['home'] do
   to '/srv/jenkins'
 end
+
+group 'docker' do
+  action :manage
+  members 'jenkins'
+end

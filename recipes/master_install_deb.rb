@@ -4,10 +4,10 @@
     action :upgrade
   end
 end
-  
+
 # Download the remote DEB file
 remote_file "#{Chef::Config[:file_cache_path]}/jenkins_#{node['platform_jenkins']['master']['version']}_all.deb" do
-  source   node['platform_jenkins']['master']['source']
+  source node['platform_jenkins']['master']['source']
   checksum node['platform_jenkins']['master']['checksum'] if node['platform_jenkins']['master']['checksum']
   action :create_if_missing
 end
@@ -45,17 +45,17 @@ execute 'set-bash-shell' do
 end
 
 template '/etc/default/jenkins' do
-  source   'jenkins-config.erb'
-  mode     '0644'
+  source 'jenkins-config.erb'
+  mode '0644'
   notifies :restart, 'service[jenkins]', :delayed
-end
-
-group 'docker' do
-  action :manage
-  members ['vagrant','jenkins']
 end
 
 service 'jenkins' do
   supports status: true, restart: true, reload: true
   action [:enable, :start]
+end
+
+group 'docker' do
+  action :manage
+  members 'jenkins'
 end

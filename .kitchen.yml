@@ -25,4 +25,4 @@ suites:
     attributes:
     driver:
       network:
-        - [ 'private_network', { ip: '192.168.42.300' } ]
+        - [ 'private_network', { ip: '192.168.42.210' } ]
