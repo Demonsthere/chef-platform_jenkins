@@ -46,20 +46,7 @@ describe file('/usr/local/lib/jenkins/jenkins-cli.jar') do
   it { should be_readable.by('others') }
 end
 
-describe file('/var/lib/jenkins/jenkins.advancedqueue.PriorityConfiguration.xml') do
-  it { should be_file }
+describe file('/var/lib/jenkins/scm-sync-configuration/checkoutConfiguration') do
+  it { should be_directory }
   it { should be_owned_by('jenkins') }
-  it { should be_readable.by('others') }
-end
-
-describe file('/var/lib/jenkins/jenkins.advancedqueue.PrioritySorterConfiguration.xml') do
-  it { should be_file }
-  it { should be_owned_by('jenkins') }
-  it { should be_readable.by('others') }
-end
-
-describe file('/var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml') do
-  it { should be_file }
-  it { should be_owned_by('jenkins') }
-  it { should be_readable.by('others') }
 end
