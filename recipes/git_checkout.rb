@@ -25,6 +25,7 @@ bash 'checkout scm-sync-configuration' do
   done
   cp -r #{configcheckout}/*.xml /var/lib/jenkins/
   chown jenkins:jenkins /var/lib/jenkins/*.xml
+  chown jenkins:jenkins /var/lib/jenkins/jobs
   service jenkins start
   EOL
   only_if "su - jenkins -c \"git ls-remote #{node['platform_jenkins']['master']['jenkins_config_git_url']} >/dev/null 2>&1\" || test -d #{configshared}"

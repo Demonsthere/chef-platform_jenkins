@@ -32,6 +32,10 @@ describe file('/var/lib/jenkins') do
   it { should be_linked_to '/srv/jenkins' }
 end
 
+describe file('/var/lib/jenkins/jobs') do
+  it { should be_owned_by 'jenkins' }
+end
+
 describe command('sudo -i -u jenkins export | grep JAVA_HOME') do
   its(:stdout) { should match '/usr/lib/jvm/default-java' }
 end
