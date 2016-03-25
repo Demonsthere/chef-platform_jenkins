@@ -27,3 +27,8 @@ cookbook_file 'known_hosts' do
   mode '0644'
   action :create_if_missing
 end
+
+execute 'Add apache to known_hosts' do
+  command 'ssh-keyscan 192.168.42.100 >> ~/.ssh/known_hosts'
+  action :run
+end
