@@ -7,9 +7,9 @@ default['platform_jenkins']['master']['jenkins_args'] = ''
 
 default['platform_jenkins']['master']['version'] = '1.650'
 
-default['platform_jenkins']['master']['source'] = "http://192.168.42.100:80/data/jenkins/bin/jenkins_#{node['platform_jenkins']['master']['version']}_all.deb"
+default['platform_jenkins']['master']['source'] = "http://192.168.42.100:4280/data/jenkins/bin/jenkins_#{node['platform_jenkins']['master']['version']}_all.deb"
 
-default['platform_jenkins']['master']['plugin_baseurl'] = %w(https://updates.jenkins-ci.org/download/plugins http://192.168.42.100:80/data/jenkins/plugins)
+default['platform_jenkins']['master']['plugin_baseurl'] = %w(https://updates.jenkins-ci.org/download/plugins http://192.168.42.100:4280/data/jenkins/plugins)
 default['platform_jenkins']['master']['plugin_list'] = [
   ['analysis-core', '1.71'],
   ['ansicolor', '0.4.1'],
@@ -88,7 +88,7 @@ default['platform_jenkins']['slave']['home'] = '/var/lib/jenkins'
 default['platform_jenkins']['slave']['shell'] = '/bin/bash'
 default['platform_jenkins']['slave']['swarm_version'] = '1.22'
 default['platform_jenkins']['slave']['swarm_jar'] = "swarm-client-#{node['platform_jenkins']['slave']['swarm_version']}-jar-with-dependencies.jar"
-default['platform_jenkins']['slave']['swarm_base_url'] = 'http://192.168.42.100:80/data/jenkins/bin'
+default['platform_jenkins']['slave']['swarm_base_url'] = 'http://192.168.42.100:4280/data/jenkins/bin'
 default['platform_jenkins']['slave']['master_url']           = "http://192.168.42.200:#{node['platform_jenkins']['master']['port']}"
 default['platform_jenkins']['slave']['jenkins_ui_user']      = 'jenkins-ui-user'
 default['platform_jenkins']['slave']['jenkins_ui_password']  = 'jenkins-ui-password'

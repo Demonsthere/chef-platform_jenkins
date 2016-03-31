@@ -29,6 +29,7 @@ cookbook_file 'known_hosts' do
 end
 
 execute 'Add apache to known_hosts' do
-  command 'ssh-keyscan 192.168.42.100 >> ~/.ssh/known_hosts'
+  command "ssh-keyscan 192.168.42.100 >> #{node['platform_jenkins']['master']['home']}/.ssh/known_hosts"
   action :run
+  user 'jenkins'
 end
