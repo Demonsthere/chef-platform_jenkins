@@ -14,6 +14,3 @@ bin/*
 
 .kitchen/
 .kitchen.local.yml
-files/id_rsa
-files/id_rsa.pub
-files/known_hosts

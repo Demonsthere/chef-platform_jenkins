@@ -5,9 +5,9 @@ default['platform_jenkins']['master']['log_directory'] = '/var/log/jenkins'
 default['platform_jenkins']['master']['listen_address'] = '0.0.0.0'
 default['platform_jenkins']['master']['jenkins_args'] = ''
 
-default['platform_jenkins']['master']['version'] = '1.650'
+default['platform_jenkins']['master']['version'] = '1.651.2'
 
-default['platform_jenkins']['master']['source'] = "http://192.168.24.100:4280/data/jenkins/bin/jenkins_#{node['platform_jenkins']['master']['version']}_all.deb"
+default['platform_jenkins']['master']['source'] = "http://pkg.jenkins-ci.org/debian-stable/binary/jenkins_#{node['platform_jenkins']['master']['version']}_all.deb"
 
 default['platform_jenkins']['master']['plugin_baseurl'] = %w(https://updates.jenkins-ci.org/download/plugins http://192.168.24.100:4280/data/jenkins/plugins)
 default['platform_jenkins']['master']['plugin_list'] = [
@@ -36,9 +36,7 @@ default['platform_jenkins']['master']['plugin_list'] = [
   ['greenballs', '1.14'],
   ['groovy', '1.24'],
   ['javadoc', '1.3'],
-  ['jquery', '1.7.2-1'],
   ['job-dsl', '1.35'],
-  ['junit', '1.4'],
   ['locale', '1.2'],
   ['nodelabelparameter', '1.5.1'],
   ['monitoring', '1.59.0'],
