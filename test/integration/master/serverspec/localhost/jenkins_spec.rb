@@ -5,7 +5,7 @@ require_relative '../spec_helper'
 # ----------------------------
 
 describe package('jenkins') do
-  it { should be_installed.by('apt').with_version('1.570') }
+  it { should be_installed.by('apt') }
 end
 
 describe process('java') do

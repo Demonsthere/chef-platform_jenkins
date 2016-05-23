@@ -15,11 +15,11 @@ execute 'Backup original sfdisk' do
   action :run
 end
 
-remote_file '/sbin/sfdisk' do
+cookbook_file '/sbin/sfdisk' do
   owner 'root'
   group 'root'
   mode '0755'
-  source 'http://192.168.42.100:4280/data/bin/sfdisk'
+  source 'sfdisk'
 end
 
 service 'jenkins-swarm-slave' do

@@ -4,7 +4,7 @@ maintainer_email 'jakub.blaszczyk@sap.com'
 license 'all_rights'
 description 'Installs/Configures chef-platform_jenkins'
 long_description 'Installs/Configures chef-platform_jenkins'
-version '0.1.8'
+version '0.1.9'
 
 depends 'platform_base'
 depends 'ark'

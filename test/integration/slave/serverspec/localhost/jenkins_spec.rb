@@ -4,7 +4,7 @@ require 'busser/rubygems'
 Busser::RubyGems.install_gem('faraday', '~> 0.9.0')
 require 'faraday'
 
-master_url = 'http://192.168.42.200:9080'
+master_url = 'http://192.168.24.200:9080'
 slave_name = 'jkslave'
 
 describe service('jenkins-swarm-slave') do
