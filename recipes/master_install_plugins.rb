@@ -6,7 +6,7 @@ directory '/var/lib/jenkins/plugins' do
 end
 
 plugins_to_be_installed = []
-node['platform_jenkins']['master']['plugin_list'].each_with_index do |plugin, _i|
+node[:platform_jenkins][:master][:plugin_list].each_with_index do |plugin, _i|
   plugin_version_installed = ''
   plugin_manifest = "/var/lib/jenkins/plugins/#{plugin[0]}/META-INF/MANIFEST.MF"
   if File.file?(plugin_manifest)
@@ -34,7 +34,7 @@ node['platform_jenkins']['master']['plugin_list'].each_with_index do |plugin, _i
 end
 
 plugins_to_be_installed.each_with_index do |plugin, i|
-  base_url = node['platform_jenkins']['master']['plugin_baseurl']
+  base_url = node[:platform_jenkins][:master][:plugin_baseurl]
   base_urls = []
   !base_url.is_a?(Array) ? base_urls.push(base_url) : base_urls = base_url
   urls = base_urls.map { |url| "#{url}/#{plugin[0]}/#{plugin[1]}/#{plugin[0]}.hpi" }

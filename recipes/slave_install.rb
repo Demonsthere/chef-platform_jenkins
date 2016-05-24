@@ -1,24 +1,24 @@
 # setup jenkins user and home
 user 'jenkins' do
-  home node['platform_jenkins']['slave']['home']
-  shell node['platform_jenkins']['slave']['shell']
+  home node[:platform_jenkins][:slave][:home]
+  shell node[:platform_jenkins][:slave][:shell]
   manage_home true
 end
 
-directory node['platform_jenkins']['slave']['home'] do
+directory node[:platform_jenkins][:slave][:home] do
   owner 'jenkins'
 end
 
 # install swarm jar
-remote_file "#{node['platform_jenkins']['slave']['home']}/#{node['platform_jenkins']['slave']['swarm_jar']}" do
-  source "#{node['platform_jenkins']['slave']['swarm_base_url']}/#{node['platform_jenkins']['slave']['swarm_jar']}"
+remote_file "#{node[:platform_jenkins][:slave][:home]}/#{node[:platform_jenkins][:slave][:swarm_jar]}" do
+  source "#{node[:platform_jenkins][:slave][:swarm_base_url]}/#{node[:platform_jenkins][:slave][:swarm_jar]}"
   headers 'Host' => URI.parse(source.first).host
   action :create_if_missing
   notifies :restart, 'service[jenkins-swarm-slave]', :delayed
 end
 
-link "#{node['platform_jenkins']['slave']['home']}/swarm-slave.jar" do
-  to "#{node['platform_jenkins']['slave']['home']}/#{node['platform_jenkins']['slave']['swarm_jar']}"
+link "#{node[:platform_jenkins][:slave][:home]}/swarm-slave.jar" do
+  to "#{node[:platform_jenkins][:slave][:home]}/#{node[:platform_jenkins][:slave][:swarm_jar]}"
 end
 
 # create service file
@@ -38,7 +38,7 @@ execute 'mv /var/lib/jenkins /srv' do
 end
 
 # link home to true directory
-link node['platform_jenkins']['slave']['home'] do
+link node[:platform_jenkins][:slave][:home] do
   to '/srv/jenkins'
 end
 

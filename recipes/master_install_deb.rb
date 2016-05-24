@@ -6,16 +6,16 @@
 end
 
 # Download the remote DEB file
-remote_file "#{Chef::Config[:file_cache_path]}/jenkins_#{node['platform_jenkins']['master']['version']}_all.deb" do
-  source node['platform_jenkins']['master']['source']
-  checksum node['platform_jenkins']['master']['checksum'] if node['platform_jenkins']['master']['checksum']
+remote_file "#{Chef::Config[:file_cache_path]}/jenkins_#{node[:platform_jenkins][:master][:version]}_all.deb" do
+  source node[:platform_jenkins][:master][:source]
+  checksum node[:platform_jenkins][:master][:checksum] if node[:platform_jenkins][:master][:checksum]
   action :create_if_missing
 end
 
-dpkg_package "jenkins_#{node['platform_jenkins']['master']['version']}_all.deb" do
+dpkg_package "jenkins_#{node[:platform_jenkins][:master][:version]}_all.deb" do
   options '--force-confdef'
-  source "#{Chef::Config[:file_cache_path]}/jenkins_#{node['platform_jenkins']['master']['version']}_all.deb"
-  version node['platform_jenkins']['master']['version']
+  source "#{Chef::Config[:file_cache_path]}/jenkins_#{node[:platform_jenkins][:master][:version]}_all.deb"
+  version node[:platform_jenkins][:master][:version]
   notifies :restart, 'service[jenkins]', :delayed
 end
 

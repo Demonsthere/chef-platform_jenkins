@@ -4,17 +4,17 @@ After=syslog.target
 After=network.target
 
 [Service]
-WorkingDirectory=<%= node['platform_jenkins']['slave']['home'] %>
+WorkingDirectory=<%= node[:platform_jenkins][:slave][:home] %>
 ExecStart=/usr/bin/java \
- -jar <%= node['platform_jenkins']['slave']['home'] %>/swarm-client-1.22-jar-with-dependencies.jar \
+ -jar <%= node[:platform_jenkins][:slave][:home] %>/swarm-client-1.22-jar-with-dependencies.jar \
  -description "Jenkins Swarm Slave Description" \
- -executors <%= node['platform_jenkins']['slave']['executors'] %> \
- -master "<%= node['platform_jenkins']['slave']['master_url'] %>" \
- -fsroot "<%= node['platform_jenkins']['slave']['home'] %>" \
- -labels "<%= node['platform_jenkins']['slave']['labels'] %>" \
- -name "<%= node['platform_jenkins']['slave']['name'] %>" \
- -username "<%= node['platform_jenkins']['slave']['jenkins-ui-user'] %>" \
- -password "<%= node['platform_jenkins']['slave']['jenkins-ui-password'] %>"
+ -executors <%= node[:platform_jenkins][:slave][:executors] %> \
+ -master "<%= node[:platform_jenkins][:slave][:master_url] %>" \
+ -fsroot "<%= node[:platform_jenkins][:slave][:home] %>" \
+ -labels "<%= node[:platform_jenkins][:slave][:labels] %>" \
+ -name "<%= node[:platform_jenkins][:slave][:name] %>" \
+ -username "<%= node[:platform_jenkins][:slave][:jenkins_ui_user] %>" \
+ -password "<%= node[:platform_jenkins][:slave][:jenkins_ui_password] %>"
 User=jenkins
 Restart=always
 
