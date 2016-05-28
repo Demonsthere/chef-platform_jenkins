@@ -44,6 +44,7 @@ default[:platform_jenkins][:master][:plugin_list] = [
   ['locale', '1.2'],
   ['nodelabelparameter', '1.5.1'],
   ['monitoring', '1.59.0'],
+  ['multiple-scms', '0.6'],
   ['pam-auth', '1.2'],
   ['Parameterized-Remote-Trigger', '2.1.3'],
   ['parameterized-trigger', '2.25'],
