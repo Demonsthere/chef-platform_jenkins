@@ -40,6 +40,7 @@ default[:platform_jenkins][:master][:plugin_list] = [
   ['greenballs', '1.14'],
   ['groovy', '1.24'],
   ['javadoc', '1.3'],
+  ['jquery', '1.7.2-1'],
   ['job-dsl', '1.35'],
   ['locale', '1.2'],
   ['nodelabelparameter', '1.5.1'],
