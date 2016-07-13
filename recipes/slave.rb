@@ -9,6 +9,8 @@ cookbook_file '/etc/sudoers.d/jenkins' do
   mode '0440'
 end
 
-service 'jenkins-swarm-slave' do
-  action [:enable, :start]
+execute 'start-jenkins' do
+  command 'echo w00t'
+  notifies :start, 'service[jenkins-swarm-slave]', :delayed
+  not_if "test -L #{node[:platform_jenkins][:slave][:home]}"
 end

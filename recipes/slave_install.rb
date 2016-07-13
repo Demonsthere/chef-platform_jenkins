@@ -46,3 +46,7 @@ group 'docker' do
   action :manage
   members 'jenkins'
 end
+
+service 'jenkins-swarm-slave' do
+  action [:enable, :start]
+end
