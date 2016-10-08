@@ -9,8 +9,8 @@ default[:platform_jenkins][:master][:version] = '1.651.2'
 
 default[:platform_jenkins][:master][:source] = "http://pkg.jenkins-ci.org/debian-stable/binary/jenkins_#{node[:platform_jenkins][:master][:version]}_all.deb"
 
-default[:platform_jenkins][:apache][:url] = '192.168.24.100'
-default[:platform_jenkins][:apache][:port] = '4280'
+default[:platform_jenkins][:apache][:url] = 'apache.pitux.ovh'
+default[:platform_jenkins][:apache][:port] = '80'
 default[:platform_jenkins][:apache][:full_url] = "http://#{node[:platform_jenkins][:apache][:url]}:#{node[:platform_jenkins][:apache][:port]}"
 
 default[:platform_jenkins][:master][:plugin_baseurl] = ['https://updates.jenkins-ci.org/download/plugins', "#{node[:platform_jenkins][:apache][:full_url]}/data/jenkins/plugins"]
