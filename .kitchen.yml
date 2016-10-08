@@ -12,6 +12,7 @@ platforms:
   - name: debian8_local
     driver:
         box: debian8_local
+        box_url: "http://apache.pitux.ovh/data/vagrant/debian8_local"
 
 suites:
   - name: master
